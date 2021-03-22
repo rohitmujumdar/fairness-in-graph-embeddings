@@ -6,3 +6,5 @@ src/data/df_positive.csv
 src/data/df_test.csv
 src/data/df_train.csv
 src/data/node2vec.model
+src/data/test_keys.pkl
+src/data/train_keys.pkl
