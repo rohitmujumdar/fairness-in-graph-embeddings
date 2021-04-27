@@ -1,10 +1,15 @@
+src/data/ml_graph_with_movies (1).gpickle
+src/data/df_test_20k.csv
 .ipynb_checkpoints/
 .idea/
-src/data/*_vectors.npy
+src/results/
 src/data/df_negative.csv
 src/data/df_positive.csv
 src/data/df_test.csv
 src/data/df_train.csv
-src/data/node2vec.model
-src/data/test_keys.pkl
-src/data/train_keys.pkl
+src/data/features/node2vec/*.model
+src/data/features/fairwalk/*_vectors.npy
+src/data/features/fairwalk/*_keys.npy
+src/data/features/node2vec/*_vectors.npy
+src/data/features/node2vec/*_keys.npy
+src/data/features/
