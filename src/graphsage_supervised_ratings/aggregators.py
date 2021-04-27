@@ -37,17 +37,11 @@ class MeanAggregator(nn.Module):
         # Local pointers to functions (speed hack)
         _set = set
 
-        # TODO: change the sampling strategy
-        # if self.movie_to_user:
-        # import pdb; pdb.set_trace()
-
-
         if not num_sample is None:
             # we can change the function to sample the neighbors
             _sample = random.sample
 
             if (self.gender_map is not None) and fairness:
-                # import pdb; pdb.set_trace()
                 male_to_neighs = []
                 female_to_neighs = []
                 for to_neigh in to_neighs:
@@ -70,11 +64,13 @@ class MeanAggregator(nn.Module):
 
                 samp_neighs_female = [_set(_sample(female_to_neigh, int(num_sample/2),)) if len(female_to_neigh) >= int(num_sample/2) else female_to_neigh for female_to_neigh in female_to_neighs]
 
-                # print("hi")
                 samp_neighs = []
                 for i in range(len(samp_neighs_male)):
                     new_neighs = samp_neighs_male[i] | samp_neighs_female[i]
                     samp_neighs.append(new_neighs) 
+
+                # old_ns = [_set(_sample(to_neigh, num_sample,)) if len(to_neigh) >= num_sample else to_neigh for to_neigh in to_neighs]
+                # import pdb; pdb.set_trace()
 
             else:
                 samp_neighs = [_set(_sample(to_neigh, num_sample,)) if len(to_neigh) >= num_sample else to_neigh for to_neigh in to_neighs]
