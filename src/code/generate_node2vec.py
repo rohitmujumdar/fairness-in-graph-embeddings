@@ -8,10 +8,12 @@ graph = nx.read_gpickle("../data/train_graph.gpickle")
 # workers=1**
 node2vec = Node2Vec(graph,
                     dimensions=64,
-                    walk_length=80,
+                    walk_length=30,
                     num_walks=20,
                     workers=4,
-                    weight_key='weight')  # Use temp_folder for big graphs
+                    weight_key='weight',
+                    p=.5,
+                    q=.25)  # Use temp_folder for big graphs
 
 # Embed nodes
 model = node2vec.fit(window=10, min_count=1, batch_words=4)
@@ -19,10 +21,10 @@ model = node2vec.fit(window=10, min_count=1, batch_words=4)
 # `workers` are automatically passed (from the Node2Vec constructor)
 
 # Look for most similar nodes
-print(model.wv.most_similar('user1'))  # Output node names are always strings
+# print(model.wv.most_similar('user1'))  # Output node names are always strings
 
 # Save embeddings for later use
 model.wv.save_word2vec_format('../data/node2vec.model')
 
 # Save model for later use
-model.save('../data/node2vec.embeddings')
+model.save('../data/features/node2vec/word2vec.embeddings')
